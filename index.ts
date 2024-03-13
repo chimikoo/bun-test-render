@@ -4,7 +4,7 @@ import type { Request, Response } from 'express';
 const app = express();
 const port = 8080;
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
+process.env.NODE_ENV = process.env.NODE_ENV;
 
 interface HelloResponse {
   message: string; 
@@ -16,7 +16,9 @@ app.get("/", (req: Request, res: Response<HelloResponse>) => {
 
 
 app.listen(port, () => {
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV === 'production') {
     console.log(`Listening on port ${port}...`);
+  } else {
+    console.log(`Server running on dev`);
   }
 });
